@@ -1,5 +1,5 @@
 //
-//  GCDDispatch.h
+//  GCDispatch.h
 //  Queue
 //
 //  Created by c-mbp13 on 14-8-25.
