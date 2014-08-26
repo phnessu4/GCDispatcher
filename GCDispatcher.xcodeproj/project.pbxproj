@@ -1,0 +1,440 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02C67B6919AC7B4400B873A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02C67B6819AC7B4400B873A2 /* Foundation.framework */; };
+		02C67B7719AC7B4500B873A2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02C67B7619AC7B4500B873A2 /* XCTest.framework */; };
+		02C67B7819AC7B4500B873A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02C67B6819AC7B4400B873A2 /* Foundation.framework */; };
+		02C67B7A19AC7B4500B873A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02C67B7919AC7B4500B873A2 /* UIKit.framework */; };
+		02C67B7D19AC7B4500B873A2 /* libGCDispatcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02C67B6519AC7B4400B873A2 /* libGCDispatcher.a */; };
+		02C67B8319AC7B4500B873A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 02C67B8119AC7B4500B873A2 /* InfoPlist.strings */; };
+		02C67B8519AC7B4500B873A2 /* GCDispatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C67B8419AC7B4500B873A2 /* GCDispatcherTests.m */; };
+		02C67B9419AC7B9500B873A2 /* GCDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C67B9019AC7B9500B873A2 /* GCDispatch.m */; };
+		02C67B9519AC7B9500B873A2 /* GCDQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C67B9319AC7B9500B873A2 /* GCDQueue.m */; };
+		02C67B9619AC7C2400B873A2 /* GCDispatch.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02C67B8F19AC7B9500B873A2 /* GCDispatch.h */; };
+		02C67B9719AC7C2400B873A2 /* GCDispatcher.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02C67B9119AC7B9500B873A2 /* GCDispatcher.h */; };
+		02C67B9819AC7C2400B873A2 /* GCDQueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02C67B9219AC7B9500B873A2 /* GCDQueue.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		02C67B7B19AC7B4500B873A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02C67B5D19AC7B4400B873A2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 02C67B6419AC7B4400B873A2;
+			remoteInfo = GCDispatcher;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		02C67B6319AC7B4400B873A2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				02C67B9619AC7C2400B873A2 /* GCDispatch.h in CopyFiles */,
+				02C67B9719AC7C2400B873A2 /* GCDispatcher.h in CopyFiles */,
+				02C67B9819AC7C2400B873A2 /* GCDQueue.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		02C67B6519AC7B4400B873A2 /* libGCDispatcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGCDispatcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		02C67B6819AC7B4400B873A2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		02C67B6C19AC7B4500B873A2 /* GCDispatcher-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GCDispatcher-Prefix.pch"; sourceTree = "<group>"; };
+		02C67B7519AC7B4500B873A2 /* GCDispatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDispatcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		02C67B7619AC7B4500B873A2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		02C67B7919AC7B4500B873A2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		02C67B8019AC7B4500B873A2 /* GCDispatcherTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GCDispatcherTests-Info.plist"; sourceTree = "<group>"; };
+		02C67B8219AC7B4500B873A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		02C67B8419AC7B4500B873A2 /* GCDispatcherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDispatcherTests.m; sourceTree = "<group>"; };
+		02C67B8F19AC7B9500B873A2 /* GCDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDispatch.h; sourceTree = "<group>"; };
+		02C67B9019AC7B9500B873A2 /* GCDispatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDispatch.m; sourceTree = "<group>"; };
+		02C67B9119AC7B9500B873A2 /* GCDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDispatcher.h; sourceTree = "<group>"; };
+		02C67B9219AC7B9500B873A2 /* GCDQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDQueue.h; sourceTree = "<group>"; };
+		02C67B9319AC7B9500B873A2 /* GCDQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDQueue.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		02C67B6219AC7B4400B873A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02C67B6919AC7B4400B873A2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02C67B7219AC7B4500B873A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02C67B7D19AC7B4500B873A2 /* libGCDispatcher.a in Frameworks */,
+				02C67B7719AC7B4500B873A2 /* XCTest.framework in Frameworks */,
+				02C67B7A19AC7B4500B873A2 /* UIKit.framework in Frameworks */,
+				02C67B7819AC7B4500B873A2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		02C67B5C19AC7B4400B873A2 = {
+			isa = PBXGroup;
+			children = (
+				02C67B6A19AC7B4500B873A2 /* GCDispatcher */,
+				02C67B7E19AC7B4500B873A2 /* GCDispatcherTests */,
+				02C67B6719AC7B4400B873A2 /* Frameworks */,
+				02C67B6619AC7B4400B873A2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		02C67B6619AC7B4400B873A2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02C67B6519AC7B4400B873A2 /* libGCDispatcher.a */,
+				02C67B7519AC7B4500B873A2 /* GCDispatcherTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02C67B6719AC7B4400B873A2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				02C67B6819AC7B4400B873A2 /* Foundation.framework */,
+				02C67B7619AC7B4500B873A2 /* XCTest.framework */,
+				02C67B7919AC7B4500B873A2 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		02C67B6A19AC7B4500B873A2 /* GCDispatcher */ = {
+			isa = PBXGroup;
+			children = (
+				02C67B8E19AC7B9500B873A2 /* Class */,
+				02C67B6B19AC7B4500B873A2 /* Supporting Files */,
+			);
+			path = GCDispatcher;
+			sourceTree = "<group>";
+		};
+		02C67B6B19AC7B4500B873A2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				02C67B6C19AC7B4500B873A2 /* GCDispatcher-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		02C67B7E19AC7B4500B873A2 /* GCDispatcherTests */ = {
+			isa = PBXGroup;
+			children = (
+				02C67B8419AC7B4500B873A2 /* GCDispatcherTests.m */,
+				02C67B7F19AC7B4500B873A2 /* Supporting Files */,
+			);
+			path = GCDispatcherTests;
+			sourceTree = "<group>";
+		};
+		02C67B7F19AC7B4500B873A2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				02C67B8019AC7B4500B873A2 /* GCDispatcherTests-Info.plist */,
+				02C67B8119AC7B4500B873A2 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		02C67B8E19AC7B9500B873A2 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				02C67B8F19AC7B9500B873A2 /* GCDispatch.h */,
+				02C67B9019AC7B9500B873A2 /* GCDispatch.m */,
+				02C67B9119AC7B9500B873A2 /* GCDispatcher.h */,
+				02C67B9219AC7B9500B873A2 /* GCDQueue.h */,
+				02C67B9319AC7B9500B873A2 /* GCDQueue.m */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		02C67B6419AC7B4400B873A2 /* GCDispatcher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02C67B8819AC7B4500B873A2 /* Build configuration list for PBXNativeTarget "GCDispatcher" */;
+			buildPhases = (
+				02C67B6119AC7B4400B873A2 /* Sources */,
+				02C67B6219AC7B4400B873A2 /* Frameworks */,
+				02C67B6319AC7B4400B873A2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GCDispatcher;
+			productName = GCDispatcher;
+			productReference = 02C67B6519AC7B4400B873A2 /* libGCDispatcher.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		02C67B7419AC7B4500B873A2 /* GCDispatcherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02C67B8B19AC7B4500B873A2 /* Build configuration list for PBXNativeTarget "GCDispatcherTests" */;
+			buildPhases = (
+				02C67B7119AC7B4500B873A2 /* Sources */,
+				02C67B7219AC7B4500B873A2 /* Frameworks */,
+				02C67B7319AC7B4500B873A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				02C67B7C19AC7B4500B873A2 /* PBXTargetDependency */,
+			);
+			name = GCDispatcherTests;
+			productName = GCDispatcherTests;
+			productReference = 02C67B7519AC7B4500B873A2 /* GCDispatcherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		02C67B5D19AC7B4400B873A2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = stylejar;
+			};
+			buildConfigurationList = 02C67B6019AC7B4400B873A2 /* Build configuration list for PBXProject "GCDispatcher" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 02C67B5C19AC7B4400B873A2;
+			productRefGroup = 02C67B6619AC7B4400B873A2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				02C67B6419AC7B4400B873A2 /* GCDispatcher */,
+				02C67B7419AC7B4500B873A2 /* GCDispatcherTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		02C67B7319AC7B4500B873A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02C67B8319AC7B4500B873A2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		02C67B6119AC7B4400B873A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02C67B9519AC7B9500B873A2 /* GCDQueue.m in Sources */,
+				02C67B9419AC7B9500B873A2 /* GCDispatch.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02C67B7119AC7B4500B873A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02C67B8519AC7B4500B873A2 /* GCDispatcherTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		02C67B7C19AC7B4500B873A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 02C67B6419AC7B4400B873A2 /* GCDispatcher */;
+			targetProxy = 02C67B7B19AC7B4500B873A2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		02C67B8119AC7B4500B873A2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				02C67B8219AC7B4500B873A2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		02C67B8619AC7B4500B873A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		02C67B8719AC7B4500B873A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		02C67B8919AC7B4500B873A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/GCDispatcher.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GCDispatcher/GCDispatcher-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		02C67B8A19AC7B4500B873A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/GCDispatcher.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GCDispatcher/GCDispatcher-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		02C67B8C19AC7B4500B873A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GCDispatcher/GCDispatcher-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "GCDispatcherTests/GCDispatcherTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		02C67B8D19AC7B4500B873A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GCDispatcher/GCDispatcher-Prefix.pch";
+				INFOPLIST_FILE = "GCDispatcherTests/GCDispatcherTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		02C67B6019AC7B4400B873A2 /* Build configuration list for PBXProject "GCDispatcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02C67B8619AC7B4500B873A2 /* Debug */,
+				02C67B8719AC7B4500B873A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		02C67B8819AC7B4500B873A2 /* Build configuration list for PBXNativeTarget "GCDispatcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02C67B8919AC7B4500B873A2 /* Debug */,
+				02C67B8A19AC7B4500B873A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		02C67B8B19AC7B4500B873A2 /* Build configuration list for PBXNativeTarget "GCDispatcherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02C67B8C19AC7B4500B873A2 /* Debug */,
+				02C67B8D19AC7B4500B873A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 02C67B5D19AC7B4400B873A2 /* Project object */;
+}
