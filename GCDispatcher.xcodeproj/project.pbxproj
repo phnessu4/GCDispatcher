@@ -349,6 +349,7 @@
 		02C67B8919AC7B4500B873A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 0.1.0;
 				DSTROOT = /tmp/GCDispatcher.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GCDispatcher/GCDispatcher-Prefix.pch";
@@ -361,6 +362,7 @@
 		02C67B8A19AC7B4500B873A2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 0.1.0;
 				DSTROOT = /tmp/GCDispatcher.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GCDispatcher/GCDispatcher-Prefix.pch";
