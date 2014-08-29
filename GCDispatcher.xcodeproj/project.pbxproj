@@ -153,9 +153,9 @@
 		02C67B8E19AC7B9500B873A2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				02C67B9119AC7B9500B873A2 /* GCDispatcher.h */,
 				02C67B8F19AC7B9500B873A2 /* GCDispatch.h */,
 				02C67B9019AC7B9500B873A2 /* GCDispatch.m */,
-				02C67B9119AC7B9500B873A2 /* GCDispatcher.h */,
 				02C67B9219AC7B9500B873A2 /* GCDQueue.h */,
 				02C67B9319AC7B9500B873A2 /* GCDQueue.m */,
 			);
@@ -427,6 +427,7 @@
 				02C67B8A19AC7B4500B873A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		02C67B8B19AC7B4500B873A2 /* Build configuration list for PBXNativeTarget "GCDispatcherTests" */ = {
 			isa = XCConfigurationList;
@@ -435,6 +436,7 @@
 				02C67B8D19AC7B4500B873A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,6 +7,7 @@
 //
 
 #import "GCDispatch.h"
+#import <libkern/OSAtomic.h>
 
 #define GCDDispatchExceptionName  @"GCDDispatchException"
 
@@ -20,19 +21,47 @@
 
 @implementation GCDispatch
 
-- (instancetype)initWithDispatchId:(GCDDispatchId)dispatchId process:(dispatch_block_process)process completion:(dispatch_block_completion)completion;
+-(instancetype)initDispatch:(dispatch_block_process)process
+{
+    return [self initDispatch:process completion:nil];
+}
+
+-(instancetype)initDispatch:(dispatch_block_process)process completion:(dispatch_block_completion)completion
 {
     self = [super init];
     if (self) {
-        _Id     = dispatchId;
-        _result = GCD_Dispatch_Result_Null;
+        _Id    = [self dispatchIndex];
+        _Id_64 = [self dispatchIndex64];
         
+        _result     = GCD_Dispatch_Result_Null;
         _process    = process;
         _completion = completion;
         _exception  = nil;
     }
     return self;
 }
+
+#pragma mark - 内部计算任务id
+
+static GCDispatchId dispatchIndex = 0;
+-(GCDispatchId)dispatchIndex
+{
+    if (dispatchIndex > INT32_MAX) {
+        dispatchIndex = 0;
+    }
+    return OSAtomicIncrement32(&(dispatchIndex));
+}
+
+static GCDispatchId_64 dispatchIndex64 = 0;
+-(GCDispatchId_64)dispatchIndex64
+{
+    if (dispatchIndex64 > INT64_MAX) {
+        dispatchIndex64 = 0;
+    }
+    return OSAtomicIncrement64(&(dispatchIndex64));
+}
+
+#pragma mark - 执行函数
 
 -(void)process
 {

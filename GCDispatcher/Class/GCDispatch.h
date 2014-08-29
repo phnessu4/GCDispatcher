@@ -10,7 +10,8 @@
 
 @class GCDispatch;
 
-typedef int64_t GCDDispatchId;    //任务id
+typedef int32_t GCDispatchId;       //任务id  32位 int
+typedef int64_t GCDispatchId_64;    //任务id  64位 long long
 
 typedef enum
 {
@@ -26,20 +27,22 @@ typedef void (^dispatch_block_completion)(GCDispatch *dispatch);   //任务结�
 
 @interface GCDispatch : NSObject
 
-@property (atomic, assign) GCDDispatchId     Id;                //任务id
+@property (atomic, assign) GCDispatchId     Id;                 //任务id 32位
+@property (atomic, assign) GCDispatchId_64  Id_64;              //任务id 64位
 @property (atomic, assign) GCDDispatchResult result;            //任务处理结果
 @property (atomic, strong) NSException       *exception;        //任务异常结果(非异常为空)
 
 /**
  *  初始化任务
  *
- *  @param dispatchId 任务id
  *  @param process    任务处理过程
  *  @param completion 任务结束回调
  *
  *  @return 任务对象
  */
--(instancetype)initWithDispatchId:(GCDDispatchId)dispatchId process:(dispatch_block_process)process completion:(dispatch_block_completion)completion;
+-(instancetype)initDispatch:(dispatch_block_process)process completion:(dispatch_block_completion)completion;
+
+-(instancetype)initDispatch:(dispatch_block_process)process;
 
 /**
  *  开始处理任务

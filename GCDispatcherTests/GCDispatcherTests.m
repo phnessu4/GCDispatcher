@@ -152,7 +152,7 @@ void End(void)
                     [[queueClass sharedInstance] dispatch:^{
                         NSLog(@"------------ process doing something %d with completion",i);
                     } completion:^(GCDispatch *dispatch) {
-                        NSLog(@"------------ completion %lld", dispatch.Id);
+                        NSLog(@"------------ completion id: %d id64: %lld", dispatch.Id, dispatch.Id_64);
                     }];
                 }
             }

@@ -7,7 +7,6 @@
 //
 
 #import "GCDQueue.h"
-#import <libkern/OSAtomic.h>
 #import <dispatch/dispatch.h>
 #import <objc/runtime.h>
 
@@ -44,7 +43,6 @@
 @interface GCDQueue() <GCDQueueProtocol>
 {
     dispatch_queue_t    asyncQueue;             //队列
-    int64_t             asyncQueueIndex;        //队列索引
     int                 asyncSemaphoreMax;      //队列信号最大数(最大线程数)
 }
 
@@ -92,7 +90,6 @@
 {
     if ((self = [super init]))
     {
-        asyncQueueIndex   = 0;
         asyncQueue        = [self asyncQueue];
         asyncSemaphoreMax = [self asyncSemaphoreMax];
     }
@@ -136,9 +133,7 @@
         return nil;
     
     @synchronized(self){
-        GCDispatch *dispatchObj = [[GCDispatch alloc] initWithDispatchId:OSAtomicIncrement64(&(asyncQueueIndex))
-                                            process:[process copy]
-                                         completion:[completion copy]];
+        GCDispatch *dispatchObj = [[GCDispatch alloc] initDispatch:[process copy] completion:[completion copy]];
 
         //处理任务, 如果没有完成后回调, 直接返回
         if (!completion) {
