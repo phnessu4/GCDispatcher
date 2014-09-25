@@ -21,16 +21,23 @@ typedef enum
 }
 GCDDispatchResult;  //任务结果
 
-typedef void (^dispatch_block_process)(void);                       //任务处理过程
-typedef void (^dispatch_block_completion)(GCDispatch *dispatch);   //任务结束回调
+typedef enum
+{
+    GCD_Dispatch_Execute_Once   = 0,    //执行一次(默认)
+    GCD_Dispatch_Execute_Repeat = 1,    //重复执行
+}
+GCDDispatchExecute; //任务执行方式
 
+typedef void (^dispatch_block_process)(void);                       //任务处理过程
+typedef void (^dispatch_block_completion)(GCDispatch *dispatch);    //任务结束回调
 
 @interface GCDispatch : NSObject
 
-@property (atomic, assign) GCDispatchId     Id;                 //任务id 32位
-@property (atomic, assign) GCDispatchId_64  Id_64;              //任务id 64位
-@property (atomic, assign) GCDDispatchResult result;            //任务处理结果
-@property (atomic, strong) NSException       *exception;        //任务异常结果(非异常为空)
+@property (atomic, assign) GCDispatchId       Id;           //任务id 32位
+@property (atomic, assign) GCDispatchId_64    Id_64;        //任务id 64位
+@property (atomic, assign) GCDDispatchResult  result;       //任务处理结果
+@property (atomic, assign) GCDDispatchExecute execute;      //任务执行方式
+@property (atomic, strong) NSException        *exception;   //任务异常结果(非异常为空)
 
 /**
  *  初始化任务

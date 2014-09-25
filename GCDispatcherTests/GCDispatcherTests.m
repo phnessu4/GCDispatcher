@@ -162,4 +162,36 @@ void End(void)
     End();
 }
 
+
+-(void)teststartSourceTimerQueue
+{
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, [GCDQueue sharedInstance].dispatchQueue);
+    dispatch_source_set_timer(timer, dispatch_walltime(DISPATCH_TIME_NOW, NSEC_PER_SEC * 10), DISPATCH_TIME_FOREVER, 0);
+    static int i = 0;
+    dispatch_source_set_event_handler(timer, ^{
+        i++;
+        NSLog(@"!");
+        if (i == 10) {
+            i = 0;
+            NSLog(@"cancel");
+            dispatch_source_cancel(timer);
+        }
+    });
+    dispatch_source_set_event_handler(timer, ^{
+        NSLog(@"------------ 123123");
+    });
+
+    dispatch_source_set_cancel_handler(timer, ^{
+        printf("dispatch source canceled OK\n");
+    });
+
+    dispatch_resume(timer);
+    NSLog(@"------------ %@", timer);
+    sleep(15);
+
+    NSLog(@"------------ %@", timer);
+    NSLog(@"------------ %@",[GCDQueue sharedInstance].dispatchQueue);
+    sleep(10000);
+}
+
 @end

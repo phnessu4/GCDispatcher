@@ -121,7 +121,7 @@
     return asyncQueue;
 }
 
-#pragma mark - 任务管理
+#pragma mark - 任务管理 (非timer, 直接添加到队列中执行)
 -(GCDispatch *)dispatch:(dispatch_block_process)process
 {
     return [self dispatch:process completion:nil];
@@ -152,6 +152,51 @@
         return dispatchObj;
     }
 }
+
+-(GCDispatch *)dispatch:(dispatch_block_process)process interval:(uint64_t)interval repeats:(BOOL)yesOrNo
+{
+    return [self dispatch:process completion:nil interval:interval delta:0 repeats:yesOrNo];
+}
+
+-(GCDispatch *)dispatch:(dispatch_block_process)process completion:(dispatch_block_completion)completion interval:(uint64_t)interval delta:(uint64_t)delta repeats:(BOOL)yesOrNo
+{
+    if (process == nil)
+        return nil;
+
+    @synchronized(self){@autoreleasepool{
+
+    GCDispatch *dispatchObj = [[GCDispatch alloc] initDispatch:[process copy] completion:[completion copy]];
+
+    dispatch_time_t start = dispatch_walltime(DISPATCH_TIME_NOW, NSEC_PER_SEC * delta);
+    uint64_t iv           = (interval == 0) ? DISPATCH_TIME_FOREVER : interval * NSEC_PER_SEC;
+    uint64_t leeway       = 0 * NSEC_PER_SEC;
+
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, asyncQueue);
+    dispatch_source_set_timer(timer, start, iv, leeway);
+    dispatch_source_set_event_handler(timer, ^{
+        [dispatchObj process];
+    });
+    dispatch_source_set_event_handler(timer, ^{
+        [dispatchObj completion];
+    });
+    
+    dispatch_source_set_cancel_handler(timer, ^{
+
+    });
+    
+    dispatch_resume(timer);
+    NSLog(@"------------ %@", timer);
+    sleep(15);
+    
+    NSLog(@"------------ %@", timer);
+    NSLog(@"------------ %@",[GCDQueue sharedInstance].dispatchQueue);
+    sleep(10000);
+        return nil;
+    }}
+}
+
+
+
 
 #pragma mark - 私有函数, 线程任务实现
 
