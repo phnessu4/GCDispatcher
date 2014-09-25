@@ -33,7 +33,7 @@
  *
  *  @return 信号数量
  */
--(int)asyncSemaphoreMax;
+-(NSUInteger)asyncSemaphoreMax;
 
 @end
 
@@ -43,7 +43,7 @@
 @interface GCDQueue() <GCDQueueProtocol>
 {
     dispatch_queue_t    asyncQueue;             //队列
-    int                 asyncSemaphoreMax;      //队列信号最大数(最大线程数)
+    NSUInteger          asyncSemaphoreMax;      //队列信号最大数(最大线程数)
 }
 
 @end
@@ -111,7 +111,7 @@
     return dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
 }
 
--(int)asyncSemaphoreMax{
+-(NSUInteger)asyncSemaphoreMax{
     return [[NSProcessInfo processInfo] processorCount] * 2;
 }
 
@@ -235,7 +235,7 @@
     return dispatch_queue_create([GCDSerialQueueName cStringUsingEncoding:NSUTF8StringEncoding], NULL);
 }
 
--(int)asyncSemaphoreMax
+-(NSUInteger)asyncSemaphoreMax
 {
     return [[NSProcessInfo processInfo] processorCount];
 }
@@ -252,7 +252,7 @@
     return dispatch_queue_create([GCDConcurrentQueueName cStringUsingEncoding:NSUTF8StringEncoding], DISPATCH_QUEUE_CONCURRENT);
 }
 
--(int)asyncSemaphoreMax
+-(NSUInteger)asyncSemaphoreMax
 {
     //并发线程数 = 处理器核数 * 2倍
     //机器配置不一样, 性能不一样, 没有基准倍数, 理论上是cpu switch时间越小越好, 而且switch时间应小于任务执行时间
