@@ -60,6 +60,13 @@
  */
 -(GCDispatch *)dispatch:(dispatch_block_process)process;
 
+
+-(GCDispatch *)dispatch:(dispatch_block_process)process interval:(uint64_t)interval delta:(int64_t)delta repeats:(BOOL)yesOrNo;
+
+
+-(GCDispatch *)dispatch:(dispatch_block_process)process completion:(dispatch_block_completion)completion interval:(uint64_t)interval delta:(uint64_t)delta repeats:(BOOL)yesOrNo;
+
+
 @end
 
 #pragma mark - 异步串行队列. (创建新队列, 队列名 GCDSerialQueueName)

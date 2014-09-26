@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>33F6E7CD-2947-4B0F-B56D-A9F3E2EE0AF0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GCDispatcher</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>06C5DB352410C1558AB65874555024BE114C45D3</key>
+		<string>bitbucket.org:phnessu4/gcdispatcher.git</string>
+		<key>C2914BEAE02909CDD21CC1D5D43D0D4EA4EFF1B0</key>
+		<string>bitbucket.org:phnessu4/protosdk.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>GCDispatcher.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>06C5DB352410C1558AB65874555024BE114C45D3</key>
+		<string>../..</string>
+		<key>C2914BEAE02909CDD21CC1D5D43D0D4EA4EFF1B0</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>bitbucket.org:phnessu4/gcdispatcher.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>06C5DB352410C1558AB65874555024BE114C45D3</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C2914BEAE02909CDD21CC1D5D43D0D4EA4EFF1B0</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>06C5DB352410C1558AB65874555024BE114C45D3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GCDispatcher</string>
+		</dict>
+	</array>
+</dict>
+</plist>

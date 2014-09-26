@@ -8,7 +8,7 @@
 
 #import "GCDispatch.h"
 #import <libkern/OSAtomic.h>
-
+#import <dispatch/dispatch.h>
 #define GCDDispatchExceptionName  @"GCDDispatchException"
 
 @interface GCDispatch()
