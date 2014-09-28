@@ -39,18 +39,32 @@
 
 
 #pragma mark - 默认队列
-
 @interface GCDQueue() <GCDQueueProtocol>
 {
-    dispatch_queue_t    asyncQueue;             //队列
-    NSUInteger          asyncSemaphoreMax;      //队列信号最大数(最大线程数)
+    dispatch_queue_t    _asyncQueue;             //队列
+    NSUInteger          _asyncSemaphoreMax;      //队列信号最大数(最大线程数)
     
-    NSMutableDictionary *asyncDispatchTimers;        //dispatch过程中存储的timer. key为GCDispatch对象
+    NSMutableDictionary *_asyncDispatchTimerDic;        //dispatch过程中存储的timer. key为GCDispatch对象
 }
 
 @end
 
 @implementation GCDQueue
+
+-(void)setTimer:(dispatch_source_t)timer forDispatchId:(GCDispatchId)Id
+{
+    [_asyncDispatchTimerDic setObject:timer forKey:@(Id)];
+}
+
+-(void)removeTimerByDispatchId:(GCDispatchId)Id
+{
+    [_asyncDispatchTimerDic removeObjectForKey:@(Id)];
+}
+
+-(dispatch_source_t)timerByDispatchId:(GCDispatchId)Id
+{
+    return [_asyncDispatchTimerDic objectForKey:@(Id)];
+}
 
 #pragma mark - 初始化单例
 
@@ -92,9 +106,9 @@
 {
     if ((self = [super init]))
     {
-        asyncQueue          = [self asyncQueue];
-        asyncSemaphoreMax   = [self asyncSemaphoreMax];
-        asyncDispatchTimers = [NSMutableDictionary dictionary];
+        _asyncQueue          = [self asyncQueue];
+        _asyncSemaphoreMax   = [self asyncSemaphoreMax];
+        _asyncDispatchTimerDic = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -121,7 +135,7 @@
 #pragma mark - 属性接口
 -(dispatch_queue_t)dispatchQueue
 {
-    return asyncQueue;
+    return _asyncQueue;
 }
 
 #pragma mark - 任务管理 (非timer, 直接添加到队列中执行)
@@ -136,7 +150,7 @@
         return nil;
     
     @synchronized(self){
-        GCDispatch *dispatchObj = [[GCDispatch alloc] initDispatch:[process copy] completion:[completion copy]];
+        __block GCDispatch *dispatchObj = [[GCDispatch alloc] initDispatch:[process copy] completion:[completion copy]];
 
         //处理任务, 如果没有完成后回调, 直接返回
         if (!completion) {
@@ -156,72 +170,64 @@
     }
 }
 
--(GCDispatch *)dispatch:(dispatch_block_process)process interval:(uint64_t)interval delta:(int64_t)delta repeats:(BOOL)yesOrNo
-{
-    @synchronized(self){
-        GCDispatch *dispatchObj = [[GCDispatch alloc] initDispatch:[process copy] completion:nil];
-
-    dispatch_time_t start = dispatch_walltime(DISPATCH_TIME_NOW, delta * NSEC_PER_SEC);
-    uint64_t iv           = (interval == 0) ? DISPATCH_TIME_FOREVER : interval * NSEC_PER_SEC;
-    uint64_t leeway       = 0 * NSEC_PER_SEC;
-
-    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, asyncQueue);
-    dispatch_source_set_timer(timer, start, iv, leeway);
-    dispatch_source_set_event_handler(timer, ^{
-        process();
-    });
-    
-    dispatch_source_set_cancel_handler(timer, ^{
-        printf("dispatch source canceled OK\n");
-    });
-    
-    dispatchObj.timer = timer;
-    dispatch_resume(timer);
-    NSLog(@"------------ %@", timer);
-        return dispatchObj;
-
-    };
-//    sleep(15);
-//    return [self dispatch:process completion:nil interval:interval delta:delta repeats:yesOrNo];
-}
-
--(GCDispatch *)dispatch:(dispatch_block_process)process completion:(dispatch_block_completion)completion interval:(uint64_t)interval delta:(uint64_t)delta repeats:(BOOL)yesOrNo
+-(GCDispatch *)dispatch:(dispatch_block_process)process cancle:(dispatch_block_cancle)cancle interval:(uint64_t)interval delta:(uint64_t)delta
 {
     if (process == nil){
-        NSLog(@"------------ process nil");
         return nil;
     }
     
-    GCDispatch *dispatchObj = [[GCDispatch alloc] initDispatch:[process copy] completion:[completion copy]];
-        NSLog(@"------------ run");
+    //创建任务对象
+    __block GCDispatch *dispatchObj = [[GCDispatch alloc] initDispatch:[process copy] cancle:[cancle copy]];
+    @synchronized(self){@autoreleasepool{
         
+        //开始时间 = 现在时间 + 延迟(纳秒级别)
         dispatch_time_t start = dispatch_walltime(DISPATCH_TIME_NOW, delta * NSEC_PER_SEC);
-        uint64_t iv           = (interval == 0) ? DISPATCH_TIME_FOREVER : interval * NSEC_PER_SEC;
-        uint64_t leeway       = 0 * NSEC_PER_SEC;
 
-        NSLog(@"------------ start %llu iv %llu leeway %llu", start, iv, leeway);
-        NSLog(@"------------ start %llu iv %llu ", dispatch_walltime(DISPATCH_TIME_NOW, 10* NSEC_PER_SEC), 1 * NSEC_PER_SEC);
-        NSLog(@"------------ asyncQueue %@",asyncQueue);
+        //间隔时间
+        uint64_t iv           = (interval == 0) ? DISPATCH_TIME_FOREVER : interval * NSEC_PER_SEC;
+        
+        //允许误差时间 (秒 * 纳秒单位)
+        uint64_t leeway       = 0 * NSEC_PER_SEC;
     
-        dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, asyncQueue);
-        dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC, 0);
+        //初始化timer
+        dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _asyncQueue);
+        dispatch_source_set_timer(timer, start, iv, leeway);
+        
+        //设置执行函数
         dispatch_source_set_event_handler(timer, ^{
-            NSLog(@"------------ process");
             [dispatchObj process];
         });
 
+        //设置取消函数
         dispatch_source_set_cancel_handler(timer, ^{
-            NSLog(@"------------ completion");
-            [dispatchObj completion];
+            [dispatchObj cancle];
         });
-        
+    
+        //开始执行
         dispatch_resume(timer);
-    NSLog(@"------------ resume timer %@ obj %@",timer, dispatchObj);
+        
+        //将timer句柄保存到数组
+        [self setTimer:timer forDispatchId:dispatchObj.Id];
+    }}
     return dispatchObj;
 }
 
+-(void)cancle:(GCDispatch *)dispatch
+{
+    @synchronized(self){@autoreleasepool{
+        //获取队列中的timer
+        dispatch_source_t timer = [self timerByDispatchId:dispatch.Id];
 
-
+        //判断timer是否已经cancle
+        if (dispatch_source_testcancel(timer) == 0) {
+            //触发timer的cancle事件
+            dispatch_source_cancel(timer);
+            //清理队列中的timer
+            [self removeTimerByDispatchId:dispatch.Id];
+        }
+        dispatch = nil;
+    }}
+}
 
 #pragma mark - 私有函数, 线程任务实现
 
@@ -235,10 +241,10 @@
     @synchronized(self){@autoreleasepool{
         
         //设定线程信号数
-        dispatch_semaphore_t asyncSemaphore = dispatch_semaphore_create(asyncSemaphoreMax);
+        dispatch_semaphore_t asyncSemaphore = dispatch_semaphore_create(_asyncSemaphoreMax);
         
         //执行
-        dispatch_async(asyncQueue, ^{@autoreleasepool{
+        dispatch_async(_asyncQueue, ^{@autoreleasepool{
             process();
             //任务处理完毕, 线程信号-1
             dispatch_semaphore_signal(asyncSemaphore);
@@ -265,15 +271,15 @@
         //创建任务group
         dispatch_group_t asyncGroup = dispatch_group_create();
         //设定线程信号数
-        dispatch_semaphore_t asyncSemaphore = dispatch_semaphore_create(asyncSemaphoreMax);
+        dispatch_semaphore_t asyncSemaphore = dispatch_semaphore_create(_asyncSemaphoreMax);
         
         //执行
-        dispatch_group_async(asyncGroup, asyncQueue, ^{@autoreleasepool{
+        dispatch_group_async(asyncGroup, _asyncQueue, ^{@autoreleasepool{
             process();
         }});
         
         //执行结束后回调
-        dispatch_group_notify(asyncGroup, asyncQueue, ^{@autoreleasepool{
+        dispatch_group_notify(asyncGroup, _asyncQueue, ^{@autoreleasepool{
             completion();
             
             //任务处理完毕, 线程信号-1

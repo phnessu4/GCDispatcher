@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		021033CE19D4017C00172C40 /* GCDSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 021033CD19D4017C00172C40 /* GCDSource.m */; };
 		02C67B6919AC7B4400B873A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02C67B6819AC7B4400B873A2 /* Foundation.framework */; };
 		02C67B7719AC7B4500B873A2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02C67B7619AC7B4500B873A2 /* XCTest.framework */; };
 		02C67B7819AC7B4500B873A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02C67B6819AC7B4400B873A2 /* Foundation.framework */; };
@@ -48,8 +47,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		021033CC19D4017C00172C40 /* GCDSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDSource.h; sourceTree = "<group>"; };
-		021033CD19D4017C00172C40 /* GCDSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDSource.m; sourceTree = "<group>"; };
 		02C67B6519AC7B4400B873A2 /* libGCDispatcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGCDispatcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		02C67B6819AC7B4400B873A2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		02C67B6C19AC7B4500B873A2 /* GCDispatcher-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GCDispatcher-Prefix.pch"; sourceTree = "<group>"; };
@@ -161,8 +158,6 @@
 				02C67B9019AC7B9500B873A2 /* GCDispatch.m */,
 				02C67B9219AC7B9500B873A2 /* GCDQueue.h */,
 				02C67B9319AC7B9500B873A2 /* GCDQueue.m */,
-				021033CC19D4017C00172C40 /* GCDSource.h */,
-				021033CD19D4017C00172C40 /* GCDSource.m */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -248,7 +243,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				021033CE19D4017C00172C40 /* GCDSource.m in Sources */,
 				02C67B9519AC7B9500B873A2 /* GCDQueue.m in Sources */,
 				02C67B9419AC7B9500B873A2 /* GCDispatch.m in Sources */,
 			);

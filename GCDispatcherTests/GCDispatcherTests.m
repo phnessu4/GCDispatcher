@@ -166,11 +166,27 @@ void End(void)
 {
     GCDispatch *obj = [[GCDSerialQueue sharedInstance] dispatch:^{
         NSLog(@"hello world");
-    } interval:1 delta:0 repeats:YES];
-    sleep(20);
-    NSLog(@"timer %@",obj.timer);
-    dispatch_resume(obj.timer);
+        
+    } cancle:^(GCDispatch *dispatch) {
+        NSLog(@"------------ cancle");
+    } interval:1 delta:0];
+    NSLog(@"obj id %d", obj.Id);
+    
+    GCDispatch *obj2 = [[GCDSerialQueue sharedInstance] dispatch:^{
+        NSLog(@"hello world2");
+        
+    } cancle:^(GCDispatch *dispatch) {
+        NSLog(@"------------ cancle2");
+    } interval:1 delta:0];
+    NSLog(@"obj2 id %d", obj2.Id);
 
+    sleep(5);
+    [[GCDSerialQueue sharedInstance] cancle:obj];
+    sleep(5);
+    [[GCDSerialQueue sharedInstance] cancle:obj2];
+    NSLog(@"------------ cancle obj %d", obj.Id);
+    sleep(10);
+    NSLog(@"------------ test over");
 }
 
 -(void)testS

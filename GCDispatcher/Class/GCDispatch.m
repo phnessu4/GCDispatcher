@@ -15,18 +15,42 @@
 {
     dispatch_block_process    _process;      //需要异步执行的block
     dispatch_block_completion _completion;   //结束后调用
+    dispatch_block_cancle     _cancle;       //取消后调用
 }
 
 @end
 
 @implementation GCDispatch
 
+#pragma mark - 常规任务
+
 -(instancetype)initDispatch:(dispatch_block_process)process
 {
-    return [self initDispatch:process completion:nil];
+    return [self initDispatch:process cancle:nil completion:nil];
 }
 
 -(instancetype)initDispatch:(dispatch_block_process)process completion:(dispatch_block_completion)completion
+{
+    return [self initDispatch:process cancle:nil completion:completion];
+}
+
+-(instancetype)initDispatch:(dispatch_block_process)process cancle:(dispatch_block_cancle)cancle
+{
+    return [self initDispatch:process cancle:cancle completion:nil];
+}
+
+
+#pragma mark - 私有方法
+/**
+ *  初始化任务
+ *
+ *  @param process    任务处理过程
+ *  @param cancle     任务取消回调
+ *  @param completion 任务结束回调
+ *
+ *  @return 任务对象
+ */
+-(instancetype)initDispatch:(dispatch_block_process)process cancle:(dispatch_block_cancle)cancle completion:(dispatch_block_completion)completion
 {
     self = [super init];
     if (self) {
@@ -35,6 +59,7 @@
         
         _result     = GCD_Dispatch_Result_Null;
         _process    = process;
+        _cancle     = cancle;
         _completion = completion;
         _exception  = nil;
     }
@@ -105,6 +130,33 @@ static GCDispatchId_64 dispatchIndex64 = 0;
         @try {
             _result = GCD_Dispatch_Result_Success;
             _completion(self);
+        }
+        @catch (NSException *exception) {
+            _result    = GCD_Dispatch_Result_Failure;
+            _exception = exception;
+        }
+    }
+}
+
+-(void)cancle
+{
+    @synchronized(self){
+        //如果process有异常, 直接返回process异常, completion不在执行
+        if (_exception) {
+            _result = GCD_Dispatch_Result_Failure;
+            return;
+        }
+        
+        //如果任务取消无需处理, 则直接返回
+        if (!_cancle) {
+            _result = GCD_Dispatch_Result_Cancle;
+            return;
+        }
+        
+        //任务取消后的处理调用
+        @try {
+            _result = GCD_Dispatch_Result_Cancle;
+            _cancle(self);
         }
         @catch (NSException *exception) {
             _result    = GCD_Dispatch_Result_Failure;

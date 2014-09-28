@@ -18,6 +18,7 @@ typedef enum
     GCD_Dispatch_Result_Null      = 0,    //空
     GCD_Dispatch_Result_Success   = 1,    //成功
     GCD_Dispatch_Result_Failure   = 2,    //失败
+    GCD_Dispatch_Result_Cancle    = 3,    //取消
 }
 GCDDispatchResult;  //任务结果
 
@@ -30,6 +31,7 @@ GCDDispatchExecute; //任务执行方式
 
 typedef void (^dispatch_block_process)(void);                       //任务处理过程
 typedef void (^dispatch_block_completion)(GCDispatch *dispatch);    //任务结束回调
+typedef void (^dispatch_block_cancle)(GCDispatch *dispatch);        //任务取消回调
 
 @interface GCDispatch : NSObject
 
@@ -38,7 +40,17 @@ typedef void (^dispatch_block_completion)(GCDispatch *dispatch);    //任务结�
 @property (atomic, assign) GCDDispatchResult  result;       //任务处理结果
 @property (atomic, assign) GCDDispatchExecute execute;      //任务执行方式
 @property (atomic, strong) NSException        *exception;   //任务异常结果(非异常为空)
-@property (atomic, assign) dispatch_source_t  timer;
+
+#pragma mark - 常规任务
+/**
+ *  初始化任务
+ *
+ *  @param process    任务处理过程
+ *  @param cancle     任务取消回调
+ *
+ *  @return 任务对象
+ */
+-(instancetype)initDispatch:(dispatch_block_process)process cancle:(dispatch_block_cancle)cancle;
 
 /**
  *  初始化任务
@@ -50,16 +62,31 @@ typedef void (^dispatch_block_completion)(GCDispatch *dispatch);    //任务结�
  */
 -(instancetype)initDispatch:(dispatch_block_process)process completion:(dispatch_block_completion)completion;
 
+
+/**
+ *  初始化任务
+ *
+ *  @param process    任务处理过程
+ *
+ *  @return 任务对象
+ */
 -(instancetype)initDispatch:(dispatch_block_process)process;
 
+
+#pragma mark - 任务处理
 /**
  *  开始处理任务
  */
 -(void)process;
 
 /**
- *  任务结束回调
+ *  任务结束调用
  */
 -(void)completion;
+
+/**
+ *  任务取消调用
+ */
+-(void)cancle;
 
 @end
