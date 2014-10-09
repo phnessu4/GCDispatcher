@@ -187,7 +187,7 @@
         uint64_t iv           = (interval == 0) ? DISPATCH_TIME_FOREVER : interval * NSEC_PER_SEC;
         
         //允许误差时间 (秒 * 纳秒单位)
-        uint64_t leeway       = 0 * NSEC_PER_SEC;
+        uint64_t leeway       = 5ull * NSEC_PER_SEC;
     
         //初始化timer
         dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _asyncQueue);
